@@ -1,100 +1,38 @@
-import turtle
+from colorama import Style, init, Fore
+from helpers import Application, print_execution_time
 
 
-def draw_rods():
-    """Функція для малювання стрижнів."""
-    rod_height = 200
-    rod_width = 10
-    positions = [-150, 0, 150]
-    for x in positions:
-        rod = turtle.Turtle()
-        rod.hideturtle()
-        rod.speed(0)
-        rod.penup()
-        rod.goto(x, -100)
-        rod.pendown()
-        rod.goto(x, rod_height - 100)
+class Task3(Application):
+    """
+    Application class
+    """
+    @print_execution_time
+    def hanoi(self, n, source, auxiliary, target, rods)->None:
+        """Рекурсивний алгоритм вирішення задачі про вежі Ханойські"""
+        if n > 0:
+            self.hanoi(n - 1, source, target, auxiliary, rods)
+            # Переміщення диска з джерела на ціль
+            disk = rods[source].pop()
+            rods[target].append(disk)
+            print(f"Перемістити диск з {source} на {target}: {disk}")
+            print(f"Проміжний стан: {rods}")
+            self.hanoi(n - 1, auxiliary, source, target, rods)
+
+    @print_execution_time
+    def run(self):
+        init(autoreset=True)
+        n = int(input("Введіть кількість дисків (1-6): "))
+        rods = {"A": list(range(n, 0, -1)), "B": [], "C": []}
+        print(f"Початковий стан: {rods}")
+        self.hanoi(n, "A", "B", "C", rods)
+        print(f"Кінцевий стан: {rods}")
 
 
-class Disk:
-    """Клас для представлення дисків."""
-
-    def __init__(self, size, position):
-        self.size = size
-        self.position = position
-        self.turtle = turtle.Turtle()
-        self.turtle.shape("square")
-        self.turtle.shapesize(1, size)
-        self.turtle.color(self.get_color())
-        self.turtle.penup()
-        # Видаляємо виклик self.update_position() з конструктора
-
-    def get_color(self):
-        """Визначає колір диска на основі його розміру."""
-        colors = ["red", "orange", "yellow", "green", "blue", "purple"]
-        return colors[(self.size - 1) % len(colors)]
-
-    def update_position(self):
-        """Оновлює позицію диска на екрані."""
-        x_positions = {"A": -150, "B": 0, "C": 150}
-        x = x_positions[self.position]
-        y = -100 + 20 * (rods[self.position].index(self))
-        self.turtle.goto(x, y)
-
-    def move_to(self, new_position):
-        """Анімація переміщення диска на новий стрижень."""
-        x_positions = {"A": -150, "B": 0, "C": 150}
-        x_new = x_positions[new_position]
-        y_up = 150  # Підняти диск над стрижнями
-
-        # Підняти диск
-        self.turtle.goto(self.turtle.xcor(), y_up)
-        # Перемістити горизонтально
-        self.turtle.goto(x_new, y_up)
-        # Опустити диск
-        y_new = -100 + 20 * len(rods[new_position])
-        self.turtle.goto(x_new, y_new)
-
-        # Оновити позицію в моделі
-        self.position = new_position
-
-
-def hanoi(n, source, auxiliary, target):
-    """Рекурсивна функція для вирішення задачі Ханойської вежі."""
-    if n > 0:
-        hanoi(n - 1, source, target, auxiliary)
-        # Перемістити диск
-        disk = rods[source].pop()
-        disk.move_to(target)
-        rods[target].append(disk)
-        hanoi(n - 1, auxiliary, source, target)
-
-
-def main():
-    global rods
-    n = int(
-        turtle.numinput(
-            "Кількість дисків", "Введіть кількість дисків (1-6):", minval=1, maxval=6
-        )
-    )
-    screen = turtle.Screen()
-    screen.title("Ханойська вежа")
-    turtle.hideturtle()
-    turtle.speed(0)
-    draw_rods()
-
-    # Ініціалізація стрижнів
-    rods = {"A": [], "B": [], "C": []}
-
-    # Створення та розміщення дисків на стрижні A
-    for i in range(n, 0, -1):
-        disk = Disk(i, "A")
-        rods["A"].append(disk)
-        disk.update_position()  # Викликаємо update_position() після додавання диска до стрижня
-
-    hanoi(n, "A", "B", "C")
-    turtle.done()
-
-
+# Run the application
 if __name__ == "__main__":
-    main()
+    try:
+        Task3("Hanoi").run()
+    except EOFError:
+        print(f"\n{Fore.RED}Input ended unexpectedly. Exiting the application.")
+    except KeyboardInterrupt:
+        print(f"\n{Fore.RED}Operation cancelled (Ctrl+C). Exiting the application.")
