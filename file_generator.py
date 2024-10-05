@@ -92,5 +92,5 @@ def file_generator(path):
 
 
 if __name__ == "__main__":
-    parent_folder_path = Path("Temp")
+    parent_folder_path = Path("Temp/src")
     file_generator(parent_folder_path)
