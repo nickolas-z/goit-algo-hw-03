@@ -97,5 +97,5 @@
 ## Додатково
 - [Домашнє завдання до теми “Рекурсивні функції, алгоритми та приклади їх застосування”](https://www.edu.goit.global/uk/learn/24858703/19646173/19646405/homework)
 - [https://github.com/nickolas-z/goit-algo-hw-03](https://github.com/nickolas-z/goit-algo-hw-03)
-- [goit-algo-hw-03-main.zip]()
+- [goit-algo-hw-03-main.zip](https://s3.eu-north-1.amazonaws.com/lms.goit.files/e6bf9518-6bc3-43d3-8946-24ea44a0bd6b%D0%94%D0%973_%D0%97%D1%83%D0%B1%D1%87%D0%B8%D0%BA%D0%9C%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%9C%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%B9%D0%BE%D0%B2%D0%B8%D1%87.zip)
 - [Basic-Algorithms-and-Data-Structures-Neoversity](https://github.com/nickolas-z/Basic-Algorithms-and-Data-Structures-Neoversity)
